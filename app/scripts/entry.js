@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import Timer from './Components/Timer';
+import Counter from './Components/Counter';
 
 import store from './store';
 
-ReactDom.render(<Timer/>, document.getElementById('container'));
+const render = () => {
+  ReactDom.render(<Counter value={store.getState()}/>, document.getElementById('container'));
+}
 
 // console.log(store.getState());
 //
@@ -12,8 +15,8 @@ ReactDom.render(<Timer/>, document.getElementById('container'));
 //   document.body.innerText = store.getState();
 // }
 //
-// store.subscribe(render);
-// render();
+store.subscribe(render);
+render();
 //
 // document.addEventListener('click', () => {
 //   store.dispatch({type:'INCREMENT'});
