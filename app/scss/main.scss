@@ -1,6 +1,15 @@
 #timer-wrapper {
   margin: 5rem auto;
   width: 300px;
+  circle {
+    animation: growCircle 2s ease-in;
+  }
+}
+
+@keyframes growCircle {
+  from {
+    stroke-dashoffset: 0;
+  }
 }
 
 #timer {

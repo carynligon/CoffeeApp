@@ -1,4 +1,7 @@
 import React from 'react';
+import Transition from 'react-addons-css-transition-group';
+
+let time;
 
 class Timer extends React.Component {
   constructor(props) {
@@ -7,6 +10,7 @@ class Timer extends React.Component {
     this.startTimer = this.startTimer.bind(this);
   }
   addTime() {
+    this.setState({totalSeconds: (this.state.minutes * 60 + this.state.seconds)});
     if (this.state.seconds <= 58) {
       this.setState({seconds: this.state.seconds + 1})
      if (this.state.seconds <= 9 && this.state.minutes <= 9) {
@@ -22,24 +26,35 @@ class Timer extends React.Component {
    this.startTimer();
   }
   startTimer() {
-    let time = setTimeout(this.addTime.bind(this), 1000);
+    time = setTimeout(this.addTime.bind(this), 1000);
   }
   stopTimer() {
-    clearTimeout();
+    clearTimeout(time);
   }
   resetTimer() {
-    this.props.minutes = 0;
-    this.props.seconds = 0;
-    timer.textContent = '00:00';
+    this.setState({minutes: 0, seconds: 0, timerText: '00:00'});
   }
   render() {
+    let dashArray = 534;
+    let dashOffset = '0%';
+    if (this.state.totalSeconds) {
+      dashOffset = 534 - ((this.state.totalSeconds/270) * 534);
+      // if (((this.state.totalSeconds/270) * 534) <= 100) {
+      //   dashOffset = ((this.state.totalSeconds/270) * 534) * 10 - 90;
+      // } else {
+      //   dashOffset = ((this.state.totalSeconds/270) * 534);
+      // }
+    }
     return (
       <div id="timer-wrapper">
+        <svg width="200" height="200">
+          <circle className="outer" cx="95" cy="95" r="85" transform="rotate(-90, 95, 95)" fill="none" stroke="red" strokeWidth="5px" strokeDasharray={dashArray} strokeDashoffset={dashOffset}/>
+        </svg>
         <div id="timer">{this.state.timerText}</div>
         <div id="button-wrapper">
           <button id="start" onClick={this.startTimer.bind(this)}>Start</button>
           <button id="stop" onClick={this.stopTimer}>Stop</button>
-          <button id="reset" onClick={this.resetTimer}>Reset</button>
+          <button id="reset" onClick={this.resetTimer.bind(this)}>Reset</button>
         </div>
       </div>
     )
