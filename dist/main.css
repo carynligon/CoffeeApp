@@ -1,3 +1,42 @@
+.method-wrapper h2 {
+  background: #fdfdf5;
+  color: #545251;
+  font-family: sans-serif;
+  font-size: 2.5rem;
+  letter-spacing: 1.5px;
+  margin: 0;
+  padding: 4rem 0;
+  text-align: center; }
+.method-wrapper h3 {
+  font-family: sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 1.5px;
+  line-height: calc((100vh - 173px)/4);
+  margin: 0;
+  text-align: center; }
+.method-wrapper .method {
+  height: calc((100vh - 173px)/4);
+  text-align: center; }
+  .method-wrapper .method:hover {
+    color: #000;
+    cursor: pointer;
+    opacity: 0.7; }
+.method-wrapper .chemex {
+  background: #02C39A;
+  color: #fdfdf5; }
+.method-wrapper .kalita {
+  background: #00A896;
+  color: #fdfdf5; }
+.method-wrapper .aeropress {
+  background: #028090;
+  color: #fdfdf5; }
+.method-wrapper .french-press {
+  background: #05668D;
+  color: #fdfdf5; }
+
+body {
+  margin: 0; }
+
 #timer-wrapper {
   margin: 5rem auto;
   width: 300px;

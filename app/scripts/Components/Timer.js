@@ -11,7 +11,7 @@ class Timer extends React.Component {
   }
   addTime() {
     this.setState({totalSeconds: (this.state.minutes * 60 + this.state.seconds)});
-    if (this.state.seconds <= 58) {
+    if (this.state.seconds < 59) {
       this.setState({seconds: this.state.seconds + 1})
      if (this.state.seconds <= 9 && this.state.minutes <= 9) {
        this.setState({timerText: '0' + this.state.minutes + ':' + '0' + this.state.seconds})
@@ -38,19 +38,28 @@ class Timer extends React.Component {
     clearTimeout(time);
   }
   resetTimer() {
-    this.setState({minutes: 0, seconds: 0, timerText: '00:00'});
+    this.setState({minutes: 0, seconds: 0, timerText: '00:00', totalSeconds: 0});
   }
   render() {
     console.log(this.state);
     let dashArray = 534;
     let dashOffset = '0%';
     if (this.state.totalSeconds) {
-      dashOffset = 534 - ((this.state.totalSeconds/270) * 534);
-      // if (((this.state.totalSeconds/270) * 534) <= 100) {
-      //   dashOffset = ((this.state.totalSeconds/270) * 534) * 10 - 90;
-      // } else {
-      //   dashOffset = ((this.state.totalSeconds/270) * 534);
-      // }
+      let time = () => {
+        switch(this.state.method) {
+        case 'chemex':
+          return 270;
+        case 'kalita':
+          return 150;
+        case 'aeropress':
+          return 120;
+        case 'french-press':
+          return 240;
+        default:
+          return 120;
+      }
+    }
+      dashOffset = 534 - ((this.state.totalSeconds/time) * 534);
     }
     return (
       <div id="timer-wrapper">
