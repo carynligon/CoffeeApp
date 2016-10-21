@@ -6,7 +6,7 @@ let time;
 class Timer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {minutes: 0, seconds: 0, timerText:'00:00'};
+    this.state = {minutes: 0, seconds: 0, timerText:'00:00', running: false};
     this.startTimer = this.startTimer.bind(this);
   }
   addTime() {
@@ -23,10 +23,16 @@ class Timer extends React.Component {
     } else {
       this.setState({minutes: this.state.minutes + 1, seconds: 0})
    }
-   this.startTimer();
+   time = setTimeout(this.addTime.bind(this), 1000);
   }
   startTimer() {
-    time = setTimeout(this.addTime.bind(this), 1000);
+    this.setState({running: !this.state.running});
+    if (this.state.running === true) {
+      this.stopTimer();
+    } else {
+      console.log('stopping');
+      time = setTimeout(this.addTime.bind(this), 1000);
+    }
   }
   stopTimer() {
     clearTimeout(time);
@@ -35,6 +41,7 @@ class Timer extends React.Component {
     this.setState({minutes: 0, seconds: 0, timerText: '00:00'});
   }
   render() {
+    console.log(this.state);
     let dashArray = 534;
     let dashOffset = '0%';
     if (this.state.totalSeconds) {
@@ -47,13 +54,11 @@ class Timer extends React.Component {
     }
     return (
       <div id="timer-wrapper">
-        <svg width="200" height="200">
-          <circle className="outer" cx="95" cy="95" r="85" transform="rotate(-90, 95, 95)" fill="none" stroke="red" strokeWidth="5px" strokeDasharray={dashArray} strokeDashoffset={dashOffset}/>
+        <svg width="190" height="200">
+          <circle className="outer" cx="95" cy="95" r="85" transform="rotate(-90, 95, 95)" fill="none" stroke="#000" strokeWidth="5px" strokeDasharray={dashArray} strokeDashoffset={dashOffset}/>
         </svg>
-        <div id="timer">{this.state.timerText}</div>
+        <div id="timer" onClick={this.startTimer.bind(this)}>{this.state.timerText}<p>Click to start & stop</p></div>
         <div id="button-wrapper">
-          <button id="start" onClick={this.startTimer.bind(this)}>Start</button>
-          <button id="stop" onClick={this.stopTimer}>Stop</button>
           <button id="reset" onClick={this.resetTimer.bind(this)}>Reset</button>
         </div>
       </div>

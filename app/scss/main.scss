@@ -1,6 +1,7 @@
 #timer-wrapper {
   margin: 5rem auto;
   width: 300px;
+  text-align: center;
   circle {
     animation: growCircle 2s ease-in;
   }
@@ -13,12 +14,20 @@
 }
 
 #timer {
-  background: #34a5dc;
   width: 300px;
   height: 100px;
-  font-size: 5rem;
+  font-size: 3rem;
   text-align: center;
-  color: #fff;
+  color: #000;
+  position: relative;
+  bottom: 145px;
+  p {
+    font-size: 0.9rem;
+    margin: 0;
+  }
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 #button-wrapper {

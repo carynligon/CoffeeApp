@@ -1,6 +1,7 @@
 #timer-wrapper {
   margin: 5rem auto;
-  width: 300px; }
+  width: 300px;
+  text-align: center; }
   #timer-wrapper circle {
     animation: growCircle 2s ease-in; }
 
@@ -8,12 +9,18 @@
   from {
     stroke-dashoffset: 0; } }
 #timer {
-  background: #34a5dc;
   width: 300px;
   height: 100px;
-  font-size: 5rem;
+  font-size: 3rem;
   text-align: center;
-  color: #fff; }
+  color: #000;
+  position: relative;
+  bottom: 145px; }
+  #timer p {
+    font-size: 0.9rem;
+    margin: 0; }
+  #timer:hover {
+    cursor: pointer; }
 
 #button-wrapper {
   width: 300px;
