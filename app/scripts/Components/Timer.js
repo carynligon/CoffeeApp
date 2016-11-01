@@ -1,6 +1,9 @@
 import React from 'react';
 import Transition from 'react-addons-css-transition-group';
 
+import store from '../store';
+
+console.log(store);
 let time;
 
 class Timer extends React.Component {
@@ -10,6 +13,8 @@ class Timer extends React.Component {
     this.startTimer = this.startTimer.bind(this);
   }
   addTime() {
+    store.dispatch({type: 'INCREMENT'});
+    console.log(store.getState());
     this.setState({totalSeconds: (this.state.minutes * 60 + this.state.seconds)});
     if (this.state.seconds < 59) {
       this.setState({seconds: this.state.seconds + 1})
