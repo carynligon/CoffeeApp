@@ -64,7 +64,7 @@ class Timer extends React.Component {
           return 120;
       }
     }
-      dashOffset = 534 - ((this.state.totalSeconds/time) * 534);
+      dashOffset = 534 - ((store.getState().totalSeconds/time) * 534);
     }
     return (
       <div id="timer-wrapper">
